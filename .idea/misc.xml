@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/check_box_selector.xml" value="0.276" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_back.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_favorite.xml" value="0.2755" />
+        <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_favorite_heart.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_play.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_search.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_search_gray.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_top_rated.xml" value="0.2755" />
+        <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/ic_unfavorite_heart.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/icon_selector.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/drawable/rect_search_bg.xml" value="0.2755" />
         <entry key="..\:/Users/Muhammad Nasser/AndroidStudioProjects/Work/FreeLance/MovieApp/app/src/main/res/layout/activity_details.xml" value="0.35052083333333334" />
