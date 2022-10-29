@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--suppress AndroidUnknownAttribute -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.muhammad.movieapp.viewmodels.MoviesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.search.SearchFragment">
+
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_margin="15dp"
+            android:autofillHints="Movie name"
+            android:background="@drawable/rect_search_bg"
+            android:hint="@string/looking_for"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:lines="1"
+            android:padding="10dp"
+            android:text="@={viewModel.searchQuery}"
+            android:textColorHint="@color/black30"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/title_search"
+            android:padding="15dp"
+            android:src="@drawable/ic_search_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
+            app:layout_constraintEnd_toEndOf="@+id/editTextSearch"
+            app:layout_constraintTop_toTopOf="@+id/editTextSearch" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resultsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_now_playing">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.muhammad.movieapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_now_playing"
+        android:name="com.muhammad.movieapp.ui.nowplaying.NowPlayingFragment"
+        android:label="@string/title_now_playing"
+        tools:layout="@layout/fragment_now_playing" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.muhammad.movieapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_top_rated"
+        android:name="com.muhammad.movieapp.ui.toprated.TopRatedFragment"
+        android:label="@string/title_top_rated"
+        tools:layout="@layout/fragment_top_rated" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.muhammad.movieapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_search"
+        android:name="com.muhammad.movieapp.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.muhammad.movieapp.ui.favorite.FavoriteFragment"
+        android:label="@string/title_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

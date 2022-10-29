@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">MovieApp</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_now_playing">Now playing</string>
+    <string name="title_top_rated">Top rated</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_details">Movie details</string>
+    <string name="poster">Movie Poster</string>
+    <string name="looking_for">Looking for…</string>
 </resources>

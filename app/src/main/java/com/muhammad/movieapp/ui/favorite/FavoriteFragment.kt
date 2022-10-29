@@ -1,17 +1,20 @@
-package com.muhammad.movieapp.ui.notifications
+package com.muhammad.movieapp.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.muhammad.movieapp.databinding.FragmentNotificationsBinding
+import com.muhammad.movieapp.databinding.FragmentFavoriteBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class NotificationsFragment : Fragment() {
+@AndroidEntryPoint
+class FavoriteFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentFavoriteBinding? = null
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,16 +25,13 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        ViewModelProvider(this)[FavoriteViewModel::class.java]
+
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
         return root
     }
 

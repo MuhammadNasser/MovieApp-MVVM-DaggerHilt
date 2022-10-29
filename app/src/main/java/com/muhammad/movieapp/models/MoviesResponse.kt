@@ -3,11 +3,11 @@ package com.muhammad.movieapp.models
 import com.google.gson.annotations.SerializedName
 
 
-data class MovieResponse(
-    val page: Int,
-    val results: List<Movie>,
+data class MoviesResponse(
+    val page: Int = 0,
+    val results: List<Movie>? = null,
     @SerializedName("total_pages")
-    val totalPages: Int
+    val totalPages: Int = 0
 )
 
 
