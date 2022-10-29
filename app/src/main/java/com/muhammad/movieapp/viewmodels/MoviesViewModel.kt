@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.muhammad.movieapp.models.Movie
 import com.muhammad.movieapp.models.MovieDetails
 import com.muhammad.movieapp.models.MoviesResponse
 import com.muhammad.movieapp.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,7 +34,11 @@ constructor(private val repository: MovieRepository) : ViewModel() {
     val movieDetails: LiveData<MovieDetails>
         get() = _movieDetails
 
-    val searchQuery = MutableLiveData<String>()
+    private val _favorites = MutableLiveData<MoviesResponse>()
+    val favorites: LiveData<MoviesResponse>
+        get() = _favorites
+
+    private var _favorite: Movie? = null
 
 
     fun getNowPlayingMovies() {
@@ -69,5 +75,40 @@ constructor(private val repository: MovieRepository) : ViewModel() {
                 _searchResult.value = response.body()
             }
         }
+    }
+
+    fun getAllFavorites() {
+        viewModelScope.launch {
+            repository.getAllFavorites().collect {
+                _favorites.value = MoviesResponse(results = it)
+            }
+        }
+    }
+
+    private fun getFavoriteMovie(movieId: Int): Movie? {
+        viewModelScope.launch {
+            repository.getMovieBy(movieId).collect {
+                _favorite = it
+            }
+        }
+        return _favorite
+    }
+
+    fun addToFavorite(movie: Movie) {
+        viewModelScope.launch {
+            repository.insertMovie(movie)
+            Timber.d("Movie: ${movie.title} added to favorites successfully")
+        }
+    }
+
+    fun removeFromFavorite(movieId: Int) {
+        viewModelScope.launch {
+            repository.deleteMovie(movieId)
+            Timber.d("MovieId: $movieId removed from favorites successfully")
+        }
+    }
+
+    fun isAddedToFavorite(movieId: Int): Boolean {
+        return getFavoriteMovie(movieId) != null
     }
 }

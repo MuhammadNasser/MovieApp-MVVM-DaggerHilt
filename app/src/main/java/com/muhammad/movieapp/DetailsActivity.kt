@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.muhammad.movieapp.databinding.ActivityDetailsBinding
 import com.muhammad.movieapp.viewmodels.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_details.*
 
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
@@ -25,12 +26,18 @@ class DetailsActivity : AppCompatActivity() {
             moviesViewModel.getMovieDetails(movieId)
         }
 
-        binding.imageViewBack.setOnClickListener {
-            finish()
+        with(binding) {
+            imageViewBack.setOnClickListener {
+                finish()
+            }
         }
 
         moviesViewModel.movieDetails.observe(this) {
             binding.movieDetails = it
+
+            for (genre in it.genres) {
+                genres.append(" ${genre.name},")
+            }
         }
     }
 }

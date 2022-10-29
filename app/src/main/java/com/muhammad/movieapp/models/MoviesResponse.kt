@@ -1,5 +1,8 @@
 package com.muhammad.movieapp.models
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 
@@ -11,11 +14,16 @@ data class MoviesResponse(
 )
 
 
+@Entity("movie_table")
 data class Movie(
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
+    @ColumnInfo(name = "title")
     val title: String,
+    @ColumnInfo(name = "poster")
     @SerializedName("poster_path")
     val poster: String,
+    @ColumnInfo(name = "voteAverage")
     @SerializedName("vote_average")
     val voteAverage: String,
 )

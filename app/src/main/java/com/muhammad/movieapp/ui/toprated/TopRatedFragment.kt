@@ -32,7 +32,7 @@ class TopRatedFragment : Fragment() {
         _binding = FragmentTopRatedBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val adapter = MoviesAdapter(MoviesAdapter.MovieClickListener {
+        val adapter = MoviesAdapter(moviesViewModel, MoviesAdapter.MovieClickListener {
             val intent = Intent(activity, DetailsActivity::class.java)
             intent.putExtra("movieId", it.id)
             startActivity(intent)

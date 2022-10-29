@@ -33,39 +33,32 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val adapter = MoviesAdapter(MoviesAdapter.MovieClickListener {
+        val adapter = MoviesAdapter(moviesViewModel, MoviesAdapter.MovieClickListener {
             val intent = Intent(activity, DetailsActivity::class.java)
             intent.putExtra("movieId", it.id)
             startActivity(intent)
         })
 
-        with(moviesViewModel) {
-            searchQuery.observe(viewLifecycleOwner) {
-                searchMovies(it)
-            }
-
-            searchResult.observe(viewLifecycleOwner) {
-                adapter.moviesResponse = it
-            }
-        }
-
         with(binding) {
             resultsRecyclerView.adapter = adapter
 
             imageViewSearch.setOnClickListener {
-                val searchQuery = moviesViewModel.searchQuery.value
-                searchQuery?.let {
-                    if (it.isNotEmpty()) {
-                        moviesViewModel.searchMovies(it)
-                    } else {
-                        editTextSearch.error = "Write the movie name"
-                    }
+                val searchQuery = editTextSearch.text.toString()
+
+                if (searchQuery.isNotEmpty()) {
+                    moviesViewModel.searchMovies(searchQuery)
+                } else {
+                    editTextSearch.error = "Write the movie name"
                 }
             }
 
             editTextSearch.setOnEditorActionListener { _, _, _ ->
                 imageViewSearch.performClick()
             }
+        }
+
+        moviesViewModel.searchResult.observe(viewLifecycleOwner) {
+            adapter.moviesResponse = it
         }
 
         return root
