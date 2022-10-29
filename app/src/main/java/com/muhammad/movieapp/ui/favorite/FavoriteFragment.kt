@@ -32,7 +32,7 @@ class FavoriteFragment : Fragment() {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val adapter = MoviesAdapter(moviesViewModel, MoviesAdapter.MovieClickListener {
+        val adapter = MoviesAdapter(MoviesAdapter.MovieClickListener {
             val intent = Intent(activity, DetailsActivity::class.java)
             intent.putExtra("movieId", it.id)
             startActivity(intent)

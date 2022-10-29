@@ -7,4 +7,5 @@
     <string name="title_details">Movie details</string>
     <string name="poster">Movie Poster</string>
     <string name="looking_for">Looking for…</string>
+    <string name="add_to_favorite">Add to favorite</string>
 </resources>

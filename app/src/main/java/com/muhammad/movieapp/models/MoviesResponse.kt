@@ -23,7 +23,18 @@ data class Movie(
     @ColumnInfo(name = "poster")
     @SerializedName("poster_path")
     val poster: String,
+    @ColumnInfo(name = "overview")
+    val overview: String? = "",
     @ColumnInfo(name = "voteAverage")
     @SerializedName("vote_average")
     val voteAverage: String,
+    @ColumnInfo(name = "voteCount")
+    val voteCount: String? = "",
+    @ColumnInfo(name = "genres")
+    val genres: List<Genre> = listOf()
+)
+
+data class Genre(
+    val id: Int,
+    val name: String
 )

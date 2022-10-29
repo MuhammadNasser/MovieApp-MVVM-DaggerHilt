@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.muhammad.movieapp.models.Movie
-import com.muhammad.movieapp.models.MovieDetails
 import com.muhammad.movieapp.models.MoviesResponse
 import com.muhammad.movieapp.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,15 +29,17 @@ constructor(private val repository: MovieRepository) : ViewModel() {
     val searchResult: LiveData<MoviesResponse>
         get() = _searchResult
 
-    private val _movieDetails = MutableLiveData<MovieDetails>()
-    val movieDetails: LiveData<MovieDetails>
+    private val _movieDetails = MutableLiveData<Movie>()
+    val movieDetails: LiveData<Movie>
         get() = _movieDetails
 
     private val _favorites = MutableLiveData<MoviesResponse>()
     val favorites: LiveData<MoviesResponse>
         get() = _favorites
 
-    private var _favorite: Movie? = null
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean>
+        get() = _isFavorite
 
 
     fun getNowPlayingMovies() {
@@ -85,19 +86,11 @@ constructor(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
-    private fun getFavoriteMovie(movieId: Int): Movie? {
-        viewModelScope.launch {
-            repository.getMovieBy(movieId).collect {
-                _favorite = it
-            }
-        }
-        return _favorite
-    }
-
     fun addToFavorite(movie: Movie) {
         viewModelScope.launch {
             repository.insertMovie(movie)
             Timber.d("Movie: ${movie.title} added to favorites successfully")
+            checkIsAddedToFavorite(movie.id)
         }
     }
 
@@ -105,10 +98,16 @@ constructor(private val repository: MovieRepository) : ViewModel() {
         viewModelScope.launch {
             repository.deleteMovie(movieId)
             Timber.d("MovieId: $movieId removed from favorites successfully")
+            checkIsAddedToFavorite(movieId)
         }
     }
 
-    fun isAddedToFavorite(movieId: Int): Boolean {
-        return getFavoriteMovie(movieId) != null
+    @Suppress("SENSELESS_COMPARISON")
+    fun checkIsAddedToFavorite(movieId: Int) {
+        viewModelScope.launch {
+            repository.getMovieBy(movieId).collect { movie ->
+                _isFavorite.value = movie != null
+            }
+        }
     }
 }

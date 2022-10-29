@@ -4,15 +4,17 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.muhammad.movieapp.databinding.ActivityDetailsBinding
+import com.muhammad.movieapp.models.Movie
 import com.muhammad.movieapp.viewmodels.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_details.*
 
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailsBinding
     private val moviesViewModel: MoviesViewModel by viewModels()
+    private var movieDetails: Movie? = null
+    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,21 +24,41 @@ class DetailsActivity : AppCompatActivity() {
 
         val movieId = intent.getIntExtra("movieId", 0)
 
-        if (movieId > 0) {
-            moviesViewModel.getMovieDetails(movieId)
+        with(moviesViewModel) {
+            if (movieId > 0) {
+                getMovieDetails(movieId)
+            }
+
+            checkIsAddedToFavorite(movieId)
+
+            isFavorite.observe(this@DetailsActivity) {
+                this@DetailsActivity.isFavorite = it
+                binding.isFavorite = it
+            }
+
+            movieDetails.observe(this@DetailsActivity) {
+                this@DetailsActivity.movieDetails = it
+                binding.movie = it
+            }
         }
 
         with(binding) {
             imageViewBack.setOnClickListener {
                 finish()
             }
-        }
 
-        moviesViewModel.movieDetails.observe(this) {
-            binding.movieDetails = it
-
-            for (genre in it.genres) {
-                genres.append(" ${genre.name},")
+            addToFavorite.setOnClickListener {
+                if (this@DetailsActivity.isFavorite) {
+                    movieDetails?.let {
+                        moviesViewModel.removeFromFavorite(it.id)
+                    }
+                } else {
+                    addToFavorite.setOnClickListener {
+                        movieDetails?.let {
+                            moviesViewModel.addToFavorite(it)
+                        }
+                    }
+                }
             }
         }
     }

@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muhammad.movieapp.databinding.MovieLayoutAdapterBinding
 import com.muhammad.movieapp.models.Movie
 import com.muhammad.movieapp.models.MoviesResponse
-import com.muhammad.movieapp.viewmodels.MoviesViewModel
 
 class MoviesAdapter(
-    private val moviesViewModel: MoviesViewModel,
     private val onItemClickListener: MovieClickListener
 ) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
@@ -32,7 +30,7 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = moviesResponse.results?.get(position)
         movie?.let {
-            holder.bind(it, onItemClickListener, moviesViewModel)
+            holder.bind(it, onItemClickListener)
         }
     }
 
@@ -45,22 +43,12 @@ class MoviesAdapter(
 
         fun bind(
             movieItem: Movie,
-            onItemClickListener: MovieClickListener,
-            moviesViewModel: MoviesViewModel
+            onItemClickListener: MovieClickListener
         ) {
             with(binding) {
                 movie = movieItem
                 clickListener = onItemClickListener
-                viewModel = moviesViewModel
                 executePendingBindings()
-
-                addToFavorite.setOnClickListener {
-                    if (addToFavorite.isChecked) {
-                        moviesViewModel.addToFavorite(movieItem)
-                    } else {
-                        moviesViewModel.removeFromFavorite(movieItem.id)
-                    }
-                }
             }
         }
 

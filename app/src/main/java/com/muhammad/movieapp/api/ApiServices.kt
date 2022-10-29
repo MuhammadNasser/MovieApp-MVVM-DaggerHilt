@@ -1,6 +1,6 @@
 package com.muhammad.movieapp.api
 
-import com.muhammad.movieapp.models.MovieDetails
+import com.muhammad.movieapp.models.Movie
 import com.muhammad.movieapp.models.MoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -18,7 +18,7 @@ interface ApiServices {
     @GET("movie/{movieId}")
     suspend fun getMovieDetailsAsync(
         @Path("movieId") movieId: Int
-    ): Response<MovieDetails>
+    ): Response<Movie>
 
     @GET("search/movie")
     suspend fun searchMoviesAsync(

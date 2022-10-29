@@ -12,10 +12,6 @@
         <variable
             name="movie"
             type="com.muhammad.movieapp.models.Movie" />
-
-        <variable
-            name="viewModel"
-            type="com.muhammad.movieapp.viewmodels.MoviesViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -34,16 +30,6 @@
             android:contentDescription="@string/poster"
             android:scaleType="centerCrop"
             app:loadUrl="@{movie.poster}" />
-
-
-        <CheckBox
-            android:id="@+id/addToFavorite"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:button="@drawable/check_box_selector"
-            android:checked="@{viewModel.isAddedToFavorite(movie.id)}" />
 
 
         <RelativeLayout

@@ -6,8 +6,12 @@
     <data>
 
         <variable
-            name="movieDetails"
-            type="com.muhammad.movieapp.models.MovieDetails" />
+            name="movie"
+            type="com.muhammad.movieapp.models.Movie" />
+
+        <variable
+            name="isFavorite"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +64,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadUrl="@{movieDetails.poster}" />
+                app:loadUrl="@{movie.poster}" />
+
+            <ImageView
+                android:id="@+id/addToFavorite"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/circle_favorite_bg"
+                android:contentDescription="@string/add_to_favorite"
+                android:padding="15dp"
+                app:favoriteStatus="@{isFavorite}"
+                app:layout_constraintEnd_toEndOf="@+id/movieDetailsPoster"
+                app:layout_constraintTop_toTopOf="@id/movieDetailsPoster" />
 
             <RelativeLayout
                 android:id="@+id/relativeLayout"
@@ -84,7 +100,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_toStartOf="@+id/rating"
                     android:maxLines="2"
-                    android:text="@{movieDetails.title}"
+                    android:text="@{movie.title}"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -99,7 +115,7 @@
                     android:layout_marginTop="4dp"
                     android:alpha="0.38"
                     android:maxLines="1"
-                    android:text="@{movieDetails.voteAverage.toString()}"
+                    android:text="@{movie.voteAverage.toString()}"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     tools:text="4.5" />
@@ -111,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_margin="15dp"
-                android:text="@{movieDetails.overview}"
+                android:text="@{movie.overview}"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +147,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description"
+                app:textListOfStrings="@{movie.genres}"
                 tools:text="Genres" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

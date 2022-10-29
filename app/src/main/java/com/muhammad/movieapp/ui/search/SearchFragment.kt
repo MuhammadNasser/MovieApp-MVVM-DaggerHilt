@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val adapter = MoviesAdapter(moviesViewModel, MoviesAdapter.MovieClickListener {
+        val adapter = MoviesAdapter(MoviesAdapter.MovieClickListener {
             val intent = Intent(activity, DetailsActivity::class.java)
             intent.putExtra("movieId", it.id)
             startActivity(intent)
