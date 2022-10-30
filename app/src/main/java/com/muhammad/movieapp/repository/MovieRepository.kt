@@ -12,13 +12,14 @@ constructor(
     private val moviesDatabaseDao: MoviesDatabaseDao
 ) {
 
-    suspend fun getNowPlayingMovies() = apiServices.getNowPlayingMoviesAsync()
+    suspend fun getNowPlayingMovies(page: Int) = apiServices.getNowPlayingMoviesAsync(page)
 
-    suspend fun getTopRatedMovies() = apiServices.getTopRatedMoviesAsync()
+    suspend fun getTopRatedMovies(page: Int) = apiServices.getTopRatedMoviesAsync(page)
 
     suspend fun getMovieDetails(movieId: Int) = apiServices.getMovieDetailsAsync(movieId)
 
-    suspend fun searchMovies(searchQuery: String) = apiServices.searchMoviesAsync(searchQuery)
+    suspend fun searchMovies(searchQuery: String, page: Int) =
+        apiServices.searchMoviesAsync(searchQuery, page)
 
     suspend fun insertMovie(movie: Movie) = moviesDatabaseDao.insertMovie(movie)
 

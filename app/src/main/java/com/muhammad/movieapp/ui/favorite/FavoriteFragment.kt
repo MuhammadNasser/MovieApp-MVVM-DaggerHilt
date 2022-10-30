@@ -44,6 +44,7 @@ class FavoriteFragment : Fragment() {
             getAllFavorites()
 
             favorites.observe(viewLifecycleOwner){
+                finishLoading()
                 adapter.moviesResponse = it
             }
         }

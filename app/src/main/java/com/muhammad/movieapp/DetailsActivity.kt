@@ -32,11 +32,13 @@ class DetailsActivity : AppCompatActivity() {
             checkIsAddedToFavorite(movieId)
 
             isFavorite.observe(this@DetailsActivity) {
+                finishLoading()
                 this@DetailsActivity.isFavorite = it
                 binding.isFavorite = it
             }
 
             movieDetails.observe(this@DetailsActivity) {
+                finishLoading()
                 this@DetailsActivity.movieDetails = it
                 binding.movie = it
             }

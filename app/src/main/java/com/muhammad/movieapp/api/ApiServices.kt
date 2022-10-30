@@ -10,10 +10,14 @@ import retrofit2.http.Query
 interface ApiServices {
 
     @GET("movie/now_playing")
-    suspend fun getNowPlayingMoviesAsync(): Response<MoviesResponse>
+    suspend fun getNowPlayingMoviesAsync(
+        @Query("page") page: Int
+    ): Response<MoviesResponse>
 
     @GET("movie/top_rated")
-    suspend fun getTopRatedMoviesAsync(): Response<MoviesResponse>
+    suspend fun getTopRatedMoviesAsync(
+        @Query("page") page: Int
+    ): Response<MoviesResponse>
 
     @GET("movie/{movieId}")
     suspend fun getMovieDetailsAsync(
@@ -22,6 +26,7 @@ interface ApiServices {
 
     @GET("search/movie")
     suspend fun searchMoviesAsync(
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("page") page: Int
     ): Response<MoviesResponse>
 }
